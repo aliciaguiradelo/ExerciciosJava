@@ -10,6 +10,7 @@ public class Ex24 {
 		String s, n, estado;
 		
 		System.out.print("Digite seu nome:");
+		n=ler.next().toUpperCase();
 		System.out.print("Digite seu sexo:(M/F)");
 		s = ler.next();
 		
@@ -17,8 +18,8 @@ public class Ex24 {
 		estado = ler.next();
 		
 				
-		if (s.equals("F") && estado.equals("CASADA")) {
-			System.out.print("Está casada há quantos anos?");
+		if (s.toUpperCase().equals("F") && estado.toUpperCase().equals("CASADA")) {
+			System.out.printf("%s, você está casada há quantos anos?",n);
 			n = ler.next();
 			
 		}

@@ -1,0 +1,42 @@
+package entrada_processamento_saida;
+
+import java.util.Scanner;
+
+public class Ex44F {
+
+	public static void main(String[] args) {
+		@SuppressWarnings("resource")
+		Scanner ler = new Scanner(System.in);
+		int i;
+		float num, maior,soma,media;
+		
+		maior=0;
+		soma=0;
+		media=0;
+		
+		for(i=1;i<=20;i++) {
+			System.out.printf("Digite o %d número", i);
+			num = ler.nextFloat();
+			while(num<0) {
+				System.out.printf("Digite um número válido:");
+				num = ler.nextFloat();
+			}
+			if(i==1) {
+				maior=num;
+			}
+			else if(i>maior) {
+				maior = num;
+			}
+			soma = soma + num;
+			i ++;
+			media=soma/10;
+		}
+		System.out.printf("O maior número é:%.2f", maior);
+		System.out.printf("A soma é:%.2f", soma);
+		System.out.printf("A média é:%.2f", media);
+		
+		ler.close();
+
+	}
+
+}
