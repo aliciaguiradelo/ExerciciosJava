@@ -6,12 +6,12 @@ public class Ex52 {
 
 	public static void main(String[] args) {
 		Scanner ler = new Scanner(System.in);
-		Produto [] listaproduto = new Produto[10];
+		Ex52_Produto [] listaproduto = new Ex52_Produto[10];
 		
 		System.out.println("..::CADASTRO DE PRODUTOS::..");
 		
 		for(int i = 0; i<=9;i++) {
-			Produto p = new Produto();
+			Ex52_Produto p = new Ex52_Produto();
 			System.out.println("Digite o id do produto: ");
 			p.id = ler.nextInt();
 			System.out.println("Digite a descrição do produto: ");

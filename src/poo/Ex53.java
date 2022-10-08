@@ -8,10 +8,10 @@ public class Ex53 {
 		@SuppressWarnings("resource")
 		Scanner ler = new Scanner(System.in);
 		@SuppressWarnings("unused")
-		Aluno [] listaaluno = new Aluno[5];
+		Ex53_Aluno [] listaaluno = new Ex53_Aluno[5];
 		System.out.println("..::CADASTRO DE ALUNOS::..");
 		for(int i = 0; i<=4;i++) {
-			Aluno a = new Aluno();
+			Ex53_Aluno a = new Ex53_Aluno();
 			System.out.println("Digite o RA do aluno:");
 			a.ra = ler.next();
 			System.out.println("Digite o nome do aluno:");

@@ -6,12 +6,12 @@ public class Ex51 {
 
 	public static void main(String[] args) {
 		Scanner ler = new Scanner(System.in);
-		Cliente [] listapessoa = new Cliente [5];
+		Ex51_Cliente [] listapessoa = new Ex51_Cliente [5];
 		
 		System.out.println("..::CADASTRO DE PESSOAS::..");
 		
 		for(int i = 0; i<=4;i++) {
-			Cliente c = new Cliente();
+			Ex51_Cliente c = new Ex51_Cliente();
 			System.out.println("Digite o id do cliente: ");
 			c.id = ler.nextInt();
 			System.out.println("Digite o nome do cliente: ");
