@@ -6,6 +6,8 @@ public class Ex54_Cliente {
 	private int idade;
 	private String email;
 	private String[] ContaBancaria;
+	public String contaBanc;
+	
 	public int getId() {
 		return id;
 	}

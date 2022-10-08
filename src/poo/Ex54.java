@@ -21,11 +21,32 @@ public class Ex54 {
 			System.out.println("Você possui conta bancaria? (S/N) ");
 			c.contaBanc = ler.next();
 			listacliente [i] = c;
-		}
-		if (listacliente[i].contaBanc.toUpperCase() == "S") {
 			
+			if (listacliente[i].contaBanc.toUpperCase() == "S") {
+				Ex54_ContaBancaria [] cadastroconta = new Ex54_ContaBancaria[3];
+				//for(int i=0; i<=2; i++) {
+					Ex54_ContaBancaria cb = new Ex54_ContaBancaria ();
+					System.out.println("Digite o numero da agencia do " + (i+1) +" cliente: ");
+					cb.setAgencia(ler.next());
+					System.out.println("Digite o numero da conta do " + (i+1) +" cliente: ");
+					cb.setNumero(ler.next());
+					System.out.println("Digite o saldo da conta do " + (i+1) +" cliente: ");
+					cb.setSaldo(ler.nextDouble());
+					
+					cadastroconta [i] = cb;
 		}
+		
+			}
+			for(int i=0; i<=2; i++) {
+				System.out.println("NOME : " + listacliente[i].getNome());
+				System.out.println("ID : " + listacliente[i].getId());
+				System.out.println("IDADE : " + listacliente[i].getIdade());
+				
+			}
+			
+			ler.close();
+		}
+		
 
 	}
 
-}
