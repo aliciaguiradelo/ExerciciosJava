@@ -5,8 +5,13 @@ public class Ex54_Cliente {
 	private String nome;
 	private int idade;
 	private String email;
-	private String[] ContaBancaria;
-	public String contaBanc;
+	public Ex54_ContaBancaria conta;
+	
+	Ex54_Cliente (){
+		
+	}
+	
+	
 	
 	public int getId() {
 		return id;
