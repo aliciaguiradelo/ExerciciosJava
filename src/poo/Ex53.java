@@ -20,7 +20,7 @@ public class Ex53 {
 			a.periodo=ler.next();
 			String[] listamateria = new String[6];
 			for(int m=0; m<=5;m++) {
-				System.out.println("Digite a sigla da" + m + "materia");
+				System.out.println("Digite a sigla da" + (m+1) + "materia");
 				listamateria[m] = ler.next();
 				
 			}
