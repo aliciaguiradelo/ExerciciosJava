@@ -9,10 +9,6 @@ public class Ex56 {
 		
 		Ex56_Produto [] listaproduto = new Ex56_Produto [5];
 		
-		String nome;
-		int id;
-		double preco;
-		double quantidade;
 		char possuiCategoria;
 		
 		for(int i = 0;i<5;i++) {
@@ -61,6 +57,8 @@ public class Ex56 {
 			}
 			
 		}
+		
+		scn.close();
 
 	}
 

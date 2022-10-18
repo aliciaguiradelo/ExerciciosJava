@@ -9,9 +9,6 @@ public class Ex55 {
 			
 			Ex55_Cliente [] clientes = new Ex55_Cliente[2];
 			
-			String nome;
-			int idade;
-			String email;
 			char possuiConta;
 			
 			for(int i = 0; i < clientes.length; i++) {
@@ -55,6 +52,7 @@ public class Ex55 {
 				
 			}
 			
+			scn.close();
 
 		
 
