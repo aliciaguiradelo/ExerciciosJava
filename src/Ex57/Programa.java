@@ -13,6 +13,7 @@ public class Programa {
 	       
         int opcao;
         int id;
+        
         Cliente cli;
         int indexCliente;
         int id_cliente;
@@ -77,6 +78,7 @@ public class Programa {
                System.in.read();
            }
            else if(opcao == 2) {
+        	   //for it
                for(Cliente c: listaClientes) {
                    System.out.println(c.exibirCliente());
                }
