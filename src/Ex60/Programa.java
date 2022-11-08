@@ -1,4 +1,4 @@
-package Ex59;
+package Ex60;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,11 +28,12 @@ public class Programa {
            System.out.printf("===> Macgyver Internet Banking <===\n\n");
            System.out.printf("Escolha uma opção:\n");          
            System.out.printf("1 - Criar cliente e conta \n" +
-                             "2 - Dep�sito \n" +
+                             "2 - Depósito \n" +
                              "3 - Saque \n" +
                              "4 - Transferência \n" +
                              "5 - Consulta de saldo \n" +
-                             "6 - Sair\n\n");
+                             "6 - Consulta de extrato \n" +
+                             "7 - Sair\n\n");
  
            System.out.printf("Digite a opção desejada: ");
            opcao = ler.nextInt();
@@ -55,12 +56,14 @@ public class Programa {
                cliente.setIdade(ler.nextInt());
                
                ContaBancaria conta = new ContaBancaria();
-                           
-               System.out.print("Digite a agencia: ");
-               conta.setAgencia(ler.next());
+                                       
+               //System.out.print("Digite a agencia: ");
+               //conta.setAgencia(ler.next());
                
-               System.out.print("Digite o numero: ");
-               conta.setNumero(ler.next());
+               //System.out.print("Digite o numero: ");
+               //conta.setNumero(ler.next());
+               
+               conta.setNumero("00" + String.valueOf(id_cliente));
                            
                cliente.setConta(conta);
                
@@ -71,7 +74,7 @@ public class Programa {
            }
            else if(opcao == 2) {
                for(Cliente c: listaClientes) {
-                   System.out.println("ID: " + c.getId() + " - Nome: " + c.getNome() + " - Saldo: " + c.getConta().ConsultarSaldo());
+                   System.out.println(c.ExibirDadosClienteConta());
                }
                
                if (listaClientes.size() == 0) {
@@ -102,8 +105,8 @@ public class Programa {
                        valor = ler.nextDouble();
                    }
                    
-                   cli.getConta().Depositar(valor);
-                   
+                   cli.getConta().Depositar(valor, false);
+                                   
                    System.out.printf("Dep�sito realizado com sucesso!");
                }
                else {
@@ -114,7 +117,7 @@ public class Programa {
            }
            else if(opcao == 3) {
                for(Cliente c: listaClientes) {
-                   System.out.println("ID: " + c.getId() + " - Nome: " + c.getNome() + " - Saldo: " + c.getConta().ConsultarSaldo());
+                   System.out.println(c.ExibirDadosClienteConta());
                }
                
                System.out.print("Digite o ID do cliente que voc� deseja realizar um saque: ");
@@ -139,7 +142,7 @@ public class Programa {
                        valor = ler.nextDouble();
                    }
                
-                   if (cli.getConta().Sacar(valor))
+                   if (cli.getConta().Sacar(valor, false))
                        System.out.printf("Saque realizado com sucesso!");                      
                    else
                        System.out.printf("Saldo insuficiente para saque!");
@@ -160,7 +163,7 @@ public class Programa {
            }
            else if(opcao == 4) {
                for(Cliente c: listaClientes) {
-                   System.out.println("ID: " + c.getId() + " - Nome: " + c.getNome() + " - Saldo: " + c.getConta().ConsultarSaldo());
+                   System.out.println(c.ExibirDadosClienteConta());
                }
                
                System.out.print("Digite o ID do cliente de origem da transfer�ncia: ");
@@ -201,8 +204,8 @@ public class Programa {
                            valor = ler.nextDouble();
                        }
                        
-                       if (cli_origem.getConta().getSaldo() >= valor) {
-                           cli_origem.getConta().Transferir(valor, cli_destino);
+                       if (cli_origem.getConta().getSaldo() + cli_origem.getConta().getLimite() >= valor) {
+                           cli_origem.getConta().Transferir(valor, cli_destino, cli_origem);
                            System.out.printf("Transfer�ncia realizada com sucesso!");                      
                        }
                        else {
@@ -217,7 +220,7 @@ public class Programa {
            }
            else if(opcao == 5) {
                for(Cliente c: listaClientes) {
-                   System.out.println("ID: " + c.getId() + " - Nome: " + c.getNome() + " - Saldo: " + c.getConta().ConsultarSaldo());
+                   System.out.println(c.ExibirDadosClienteConta());
                }
                
                System.out.print("Digite o ID do cliente que voc� deseja obter o saldo: ");
@@ -241,8 +244,34 @@ public class Programa {
                }
                System.in.read();
            }
+           else if(opcao == 6) {
+               for(Cliente c: listaClientes) {
+                   System.out.println(c.ExibirDadosClienteConta());
+               }
+               
+               System.out.print("Digite o ID do cliente que você deseja obter o extrato: ");
+               id = ler.nextInt();
+               
+               indexCliente = -1;
+               for(Cliente c: listaClientes) {
+                   if (c.getId() == id) {
+                       indexCliente = listaClientes.indexOf(c);
+                       break;
+                   }
+               }
+               
+               if (indexCliente != -1) {
+                   cli = listaClientes.get(indexCliente);
+                   
+                   System.out.print(cli.getConta().ConsultarExtrato());
+               }
+               else {
+                   System.out.printf("Cliente não encontrado!");
+               }
+               System.in.read();
+           }
            
-        }while( (opcao >= 1) && (opcao <= 5) );
+        }while( (opcao >= 1) && (opcao <= 6) );
         ler.close();
     }
 }

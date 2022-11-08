@@ -47,6 +47,7 @@ public class Programa {
 				System.out.println(listaproduto[i].exibirNomeQuantidade());
 			}
 		}
+		ler.close();
 	}
 
 }

@@ -1,11 +1,11 @@
-package Ex59;
+package Ex60;
 
 public class Cliente {
 	private int id;
     private String nome;
     private int idade;
     private ContaBancaria conta;
-    
+   
     public int getId() {
         return id;
     }
@@ -40,5 +40,9 @@ public class Cliente {
         this.nome = nome;
         this.idade = idade;
         this.conta = conta;
+    }
+   
+    public String ExibirDadosClienteConta() {
+        return "ID: " + this.id + " - Nome: " + this.nome + " - Agência: " + this.conta.getAgencia() + " - Número: " + this.conta.getNumero() + " - Saldo: " + this.conta.getSaldo() + " - Limite: " + this.conta.getLimite();
     }
 }

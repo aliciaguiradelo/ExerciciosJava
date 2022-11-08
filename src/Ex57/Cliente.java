@@ -53,12 +53,12 @@ public class Cliente {
         this.email=novoEmail;
     }
     
-    public String exibirCliente() {
-        return("ID: "+this.id+ " - Nome: " + this.nome + " - Idade: " + this.idade + " - Email: " + this.email);
+    public String exibirNomeIdade() {
+        return("ID: "+this.id+ " - Nome: " + this.nome + " - Idade: " + this.idade);
     }
     
     public String exibirDadosConta() {
-        return("Agencia: "+this.conta.getAgencia()+" - Numero: "+this.conta.getNumero()+" - Saldo: "+this.conta.getSaldo());
+        return("Agencia: "+ this.conta.getAgencia()  +" - Numero: " + this.conta.getNumero() + " - Saldo: " + this.conta.getSaldo());
     }
 
 
