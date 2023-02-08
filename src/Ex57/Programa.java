@@ -9,10 +9,10 @@ public class Programa {
 	public static void main(String[] args) throws IOException {
 		Scanner ler = new Scanner(System.in);
 		
-		/*Criando um Arraylist para guardar as referências dos objetos do tipo Cliente*/
+		//Criando um Arraylist para guardar as referências dos objetos do tipo Cliente
 		ArrayList<Cliente> listaClientes = new ArrayList<>();
 	    
-		/*Declarando variáveis que serão usadas no escopo dessa classe Programa*/
+		//Declarando variáveis que serão usadas no escopo dessa classe Programa
         int opcao;
         int id;
         Cliente cli;
