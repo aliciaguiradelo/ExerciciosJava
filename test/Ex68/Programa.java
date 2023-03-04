@@ -1,26 +1,27 @@
-package Ex57;
+package Ex68;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
+import java.io.IOException;
 
 public class Programa {
 
 	public static void main(String[] args) throws IOException {
+		//CTRL + Shift + O 
 		Scanner ler = new Scanner(System.in);
 		
-		//Criando um Arraylist para guardar as referências dos objetos do tipo Cliente
-		ArrayList<Cliente> listaClientes = new ArrayList<>();
-	    
-		//Declarando variáveis que serão usadas no escopo dessa classe Programa
-        int opcao;
-        int id;
-        Cliente cli;
-        int indexCliente;
-        int id_cliente;
-        String possuiConta;
- 
-        /*Cria uma estrutura de repetição, no cado DO...WHILE, porque eu quero
+		//Instanciando um hashmap para armazenar os objetos. O hash map vai guardar uma chave do tipo
+		//Integer e um valor do tipo objeto Cliente
+		HashMap <Integer, Cliente> map = new HashMap <Integer, Cliente>(); 
+		
+		//Declarando variáveis que serão utilizadas no escopo da classe programa
+		int opcao;
+		int id;
+		Cliente cli;
+		int idCliente=0;
+		String possuiConta;
+		
+		/*Cria uma estrutura de repetição, no cado DO...WHILE, porque eu quero
          * que ele faça esse looping pelo menos uma vez*/
         do {        
         	/*Criando o menu*/
@@ -41,22 +42,13 @@ public class Programa {
         	   /*Instanciando um objeto cliente do tipo Cliente*/
                Cliente cliente = new Cliente();
                
-               /*Crio uma estrutura condicional para verificar se o arraylist está vazio ou não.
-                * Uso o método nomearraylist.size(), que vai mostrar a quantidade de objetos 
-                * instanciados no arraylist*/
-               if(listaClientes.size() > 0) {
-            	   /*Se tiver algum objeto, eu vou pegar a quantidade de objetos que tem e somar
-            	    * mais um porque estou criando um objeto.*/
-                   id_cliente = listaClientes.get(listaClientes.size()-1).getId() + 1;
-               }
-               else {
-            	   /*Se não houver objetos no arraylist, o objeto que eu criar ocupará o primeiro 
-            	    * espaço do array, por isso id=1*/
-                   id_cliente = 1;
-               }
-               /*Vou atualizar a posição do objeto*/
-               cliente.setId(id_cliente);
+               //Inclementando o idCliente
+               idCliente++;
                
+               /*Vou atualizar o id do objeto*/
+               cliente.setId(idCliente);
+               
+               /*Solicitando dados do cadastro*/
                System.out.print("Digite o seu nome: ");
                cliente.setNome(ler.next());
                
@@ -69,7 +61,7 @@ public class Programa {
                System.out.print("Possui conta bancária? S/N");
                possuiConta = ler.next().toUpperCase();
                
-               /*Se tiver conta, eu crio um objeto para popular*/
+               /*Se tiver conta, eu crio um objeto do tipo ContaBancaria para popular*/
                if(possuiConta.equals("S")) {
                    ContaBancaria conta = new ContaBancaria();
                    
@@ -82,16 +74,19 @@ public class Programa {
                    /*Toda conta começa com 0 reais*/
                    conta.setSaldo(0);
                    
-                   
+                   /*Criando uma referência em cliente para o objeto do tipo Conta que foi populado
+                    * com os valores dos seus atributos*/
+                   /*Conta é um atributo de Cliente, por isso eu uso o método set (Getters and Setters)*/
                    cliente.setConta(conta);
                }
+               
                /*Se não tiver conta, deixa nulo*/
                else {
                    cliente.setConta(null);                
                }
                
-               /*Adiciona o objeto populado no arraylist*/
-               listaClientes.add(cliente);
+               /*Adiciona a chave e o valor no hashmap*/
+               map.put(idCliente, cliente);
                
                System.out.printf("Cliente incluído com sucesso!");
                
@@ -99,24 +94,16 @@ public class Programa {
                System.in.read();
            }
            else if(opcao == 2) {
-        	   //for it para varrer um arraylist
-               for(Cliente c: listaClientes) {
-                   System.out.println(c.exibirNomeIdade());
-               }
+        	   //forEach para varrer o hashmap map e print cada chave com seu respectivo valor
+               map.forEach((chave, valor) -> {
+            	   System.out.println("ID: " + chave + " - " + valor.exibirNomeIdade());
+               });
                
                System.out.print("Digite o ID do cliente que você deseja atualizar: ");
                id = ler.nextInt();
                
-               indexCliente = -1;
-               for(Cliente c: listaClientes) {
-                   if (c.getId() == id) {
-                       indexCliente = listaClientes.indexOf(c);
-                       break;
-                   }
-               }
-               
-               if (indexCliente != -1) {
-                   cli = listaClientes.get(indexCliente);
+               if (map.containsKey(id)) {
+                   cli = map.get(id);
                    
                    System.out.print("Digite o seu novo nome: ");
                    cli.setNome(ler.next());
@@ -135,25 +122,16 @@ public class Programa {
                System.in.read();
            }
            else if(opcao == 3) {
-               for(Cliente c: listaClientes) {
-                   System.out.println(c.exibirNomeIdade());
-               }
+               map.forEach((chave, valor) -> {
+            	   System.out.println("ID: " + chave + " - " + valor.exibirNomeIdade());
+               });
                
                System.out.print("Digite o ID do cliente que você deseja excluir: ");
                id = ler.nextInt();
                
-               indexCliente = -1;
-               for(Cliente c: listaClientes) {
-                   if (c.getId() == id) {
-                       indexCliente = listaClientes.indexOf(c);
-                       break;
-                   }
-               }
-               
-               if (indexCliente != -1) {                              
-                   listaClientes.remove(indexCliente);
-                   
-                   System.out.printf("Cliente excluído com sucesso!");
+               if (map.containsKey(id)) {
+            	   map.remove(id);
+            	   System.out.println("Cliente  excluido com sucesso");
                }
                else {
                    System.out.printf("Cliente não encontrado!");
@@ -161,18 +139,17 @@ public class Programa {
                System.in.read();
            }
            else if(opcao == 4) {
-               for(Cliente c: listaClientes) {
-                   System.out.println(c.exibirNomeIdade());
-                   
-                   if (c.getConta() != null)
-                       System.out.println(c.exibirDadosConta());
-               }
+               map.forEach((chave, valor) -> {
+            	   System.out.println("ID: " + chave + " - " + valor.exibirNomeIdade());
+               });
                
                System.in.read();
            }
            
         }while( (opcao >= 1) && (opcao <= 4) );
         
-        ler.close();
-    }
+		
+		ler.close();
+	}
+
 }
