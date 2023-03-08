@@ -71,6 +71,9 @@ public class Programa {
 	            	   tipoConta = ler.nextInt();
 	            	   
 	            	   if (tipoConta == 1) {
+	            		   
+	            		   
+	            		   
 		                   ContaCorrente cc = new ContaCorrente();
 		                   
 		                   System.out.print("Digite a agencia: ");
@@ -84,7 +87,7 @@ public class Programa {
 		                   /*Criando uma referência em cliente para o objeto do tipo Conta que foi populado
 		                    * com os valores dos seus atributos*/
 		                   /*Conta é um atributo de Cliente, por isso eu uso o método set (Getters and Setters)*/
-		                   cliente.setConta(cc);
+		                   
 	            		   
 	            	   }
 	            	   else {
@@ -172,7 +175,6 @@ public class Programa {
 	        }while( (opcao >= 1) && (opcao <= 4) );
 		
 		ler.close();
-
 
 	}
 
