@@ -1,7 +1,7 @@
 package Ex70;
 
-public class ContaPoupanca extends Conta {
-	private double rentabilidade;
+public class ContaPoupanca extends Conta{
+    private double rentabilidade;
 
 
     public double getRentabilidade() {
@@ -14,19 +14,23 @@ public class ContaPoupanca extends Conta {
     }
    
     public ContaPoupanca() {
+    	super();
     }
+    
    
-    public ContaPoupanca(String agencia, String numero, double salario, double rentabilidade) {
-        super(agencia, numero, salario);
+    public ContaPoupanca(String agencia, String numero, double saldo, double rentabilidade) {
+        super(agencia, numero, saldo);
        
         this.rentabilidade = rentabilidade;
     }
-   
-    public void Depositar(double valor) {
-        super.Depositar(valor);
-       
-        valor = valor + 0.50;
-        this.setSaldo(valor);
+    
+    public String exibirDadosConta() {
+        return "Tipo de Conta: Conta Poupança\n" + super.exibirDadosConta() + "\nRentabilidade: " + rentabilidade;
     }
-
+    
+    public void Depositar(double valor) {
+    	valor = valor * (1+rentabilidade);
+    	
+        super.Depositar(valor);
+    }
 }

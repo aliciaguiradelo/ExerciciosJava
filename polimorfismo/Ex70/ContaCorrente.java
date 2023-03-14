@@ -1,8 +1,7 @@
 package Ex70;
 
 public class ContaCorrente extends Conta{
-	private double chequeEspecial;
-
+    private double chequeEspecial;
 
     public double getChequeEspecial() {
         return chequeEspecial;
@@ -14,6 +13,7 @@ public class ContaCorrente extends Conta{
     }
    
     public ContaCorrente() {
+    	super();
     }
    
     public ContaCorrente(String agencia, String numero, double salario, double chequeEspecial) {
@@ -21,12 +21,42 @@ public class ContaCorrente extends Conta{
        
         this.chequeEspecial = chequeEspecial;
     }
-   
-    public void Depositar(double valor) {
-        super.Depositar(valor);
-       
-        valor = valor - 0.10;
-        this.setSaldo(valor);
+    
+    public String exibirDadosConta() {
+        return "Tipo de Conta: Conta Corrente\n" + super.exibirDadosConta() + "\nCheque Especial: " + chequeEspecial;
     }
-
+    
+    public Boolean Sacar(double valor) {
+    	if ((getSaldo() + getChequeEspecial()) >= valor) {
+    		if (valor > getSaldo()) {
+                valor = valor - getSaldo();
+                
+    			super.Sacar(getSaldo());		
+    		
+    			chequeEspecial = chequeEspecial - valor;    		
+    		}
+    		else {
+    			super.Sacar(valor);
+    		}
+            return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
+    
+    public void Depositar(double valor) {
+    	if(chequeEspecial < 100) {
+    		if ( valor <= (100-chequeEspecial) ) {
+    			chequeEspecial = chequeEspecial + valor;
+    		}
+    		else {
+    			valor = valor - (100-chequeEspecial);
+    			chequeEspecial = 100;
+    			super.Depositar(valor);
+    		}
+    	}
+    	else
+    		super.Depositar(valor);
+    }
 }

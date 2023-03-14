@@ -6,176 +6,181 @@ import java.io.IOException;
 
 public class Programa {
 
-	public static void main(String[] args) {
-//		Vamos fazer um sistema de cadastro de clientes e sua respectiva conta bancária. 
-//		O sistema deve permitir, inclusão de cliente, depósito na conta, saque na conta, 
-//		exclusão de cliente e consulta de cliente e saldo. O cliente, deve escolher entre 
-//		conta corrente e conta poupança no momento de se cadastrar. Utilize HashMap para 
-//		armazenar os clientes e contas. Utilize Herança e Polimorfismo nos métodos da classe conta.
-		Scanner ler = new Scanner(System.in);
-		
-		HashMap <Integer, Cliente> map = new HashMap <Integer, Cliente>();
-		
-		int opcao;
-		int id;
+	public static void main(String[] args) throws IOException{
+        Scanner ler = new Scanner(System.in);
+       
+        HashMap<Integer, Cliente> listaClientes = new HashMap<Integer, Cliente>();
+       
+        int opcao;
+        int id;
+        @SuppressWarnings("unused")
 		Cliente cli;
-		int idCliente=0;
-		String possuiConta;
-		int tipoConta;
-		
-		 do {        
-	        	/*Criando o menu*/
-	           System.out.printf("===> Sistema de Cadastro de Clientes <===\n\n");
-	           System.out.printf("Escolha uma opção:\n");          
-	           System.out.printf("1 - Incluir \n" +
-	                             "2 - Depositar \n" +
-	                             "3 - Sacar \n" +
-	                             "4 - Excluir cliente \n" +
-	                             "5 - Consultar cliente e saldo \n" +
-	                             "6 - Sair\n\n");
-	 
-	           System.out.printf("Digite a opção desejada: ");
-	           opcao = ler.nextInt();
-	           
-	           /*Incluir*/
-	           if (opcao == 1) {
-	        	   
-	        	   /*Instanciando um objeto cliente do tipo Cliente*/
-	               Cliente cliente = new Cliente();
-	               
-	               //Inclementando o idCliente
-	               idCliente++;
-	               
-	               /*Vou atualizar o id do objeto*/
-	               cliente.setId(idCliente);
-	               
-	               /*Solicitando dados do cadastro*/
-	               System.out.print("Digite o seu nome: ");
-	               cliente.setNome(ler.next());
-	               
-	               System.out.print("Digite a seu idade: ");
-	               cliente.setIdade(ler.nextInt());
-	               
-	               System.out.print("Digite o seu e-mail: ");
-	               cliente.setEmail(ler.next());
-	               
-	               System.out.print("Possui conta bancária? S/N");
-	               possuiConta = ler.next().toUpperCase();
-	               
-	               /*Se tiver conta, eu crio um objeto do tipo ContaBancaria para popular*/
-	               if(possuiConta.equals("S")) {
-	            	   
-	            	   System.out.println("Qual tipo de conta deseja cadastrar? \n"+
-	            			   			  "1 - Conta Corrente \n" +
-	            			   			  "2 - Conta Poupança \n");
-	            	   tipoConta = ler.nextInt();
-	            	   
-	            	   if (tipoConta == 1) {
-	            		   
-	            		   
-	            		   
-		                   ContaCorrente cc = new ContaCorrente();
-		                   
-		                   System.out.print("Digite a agencia: ");
-		                   cc.setAgencia(ler.next());
-		                   
-		                   System.out.print("Digite o numero: ");
-		                   cc.setNumero(ler.next());
-		                   
-		                   cc.setSaldo(0);
-		                   
-		                   /*Criando uma referência em cliente para o objeto do tipo Conta que foi populado
-		                    * com os valores dos seus atributos*/
-		                   /*Conta é um atributo de Cliente, por isso eu uso o método set (Getters and Setters)*/
-		                   
-	            		   
-	            	   }
-	            	   else {
-	            		   ContaPoupanca cp = new ContaPoupanca();
-	            		   
-	            		   System.out.print("Digite a agencia: ");
-		                   cp.setAgencia(ler.next());
-		                   
-		                   System.out.print("Digite o numero: ");
-		                   cp.setNumero(ler.next());
-	            		   
-		                   cp.setSaldo(0);
-	            	   }
-	            	   
-	            	   
+        int id_cliente=0;
+        int tipoConta;
+        double v;
+ 
+        do {        
+           System.out.printf("===> Sistema de Cadastro de Clientes e Conta Bancária<===\n\n");
+           System.out.printf("Escolha uma opção:\n");          
+           System.out.printf("1 - Incluir \n" +
+                             "2 - Excluir \n" +
+                             "3 - Exibir \n" +
+                             "4 - Depositar \n" +
+                             "5 - Sacar \n" +
+                             "6 - Extrato \n" +
+                             "7 - Sair\n\n");
 
-	               }
-	               
-	               /*Se não tiver conta, deixa nulo*/
-	               else {
-	                   cliente.setConta(null);                
-	               }
-	               
-	               /*Adiciona a chave e o valor no hashmap*/
-	               map.put(idCliente, cliente);
-	               
-	               System.out.printf("Cliente incluído com sucesso!");
-	               
-	               /*Retorna um int -1*/
-	               System.in.read();
-	           }
-	           else if(opcao == 2) {
-	        	   //forEach para varrer o hashmap map e print cada chave com seu respectivo valor
-	               map.forEach((chave, valor) -> {
-	            	   System.out.println("ID: " + chave + " - " + valor.exibirNomeIdade());
-	               });
-	               
-	               System.out.print("Digite o ID do cliente que você deseja atualizar: ");
-	               id = ler.nextInt();
-	               
-	               if (map.containsKey(id)) {
-	                   cli = map.get(id);
-	                   
-	                   System.out.print("Digite o seu novo nome: ");
-	                   cli.setNome(ler.next());
-	                   
-	                   System.out.print("Digite a sua nova idade: ");
-	                   cli.setIdade(ler.nextInt());
-	                   
-	                   System.out.print("Digite o seu novo e-mail: ");
-	                   cli.setEmail(ler.next());
-	                   
-	                   System.out.printf("Cliente atualizado com sucesso!");
-	               }
-	               else {
-	                   System.out.printf("Cliente não encontrado!");
-	               }
-	               System.in.read();
-	           }
-	           else if(opcao == 3) {
-	               map.forEach((chave, valor) -> {
-	            	   System.out.println("ID: " + chave + " - " + valor.exibirNomeIdade());
-	               });
-	               
-	               System.out.print("Digite o ID do cliente que você deseja excluir: ");
-	               id = ler.nextInt();
-	               
-	               if (map.containsKey(id)) {
-	            	   map.remove(id);
-	            	   System.out.println("Cliente  excluido com sucesso");
-	               }
-	               else {
-	                   System.out.printf("Cliente não encontrado!");
-	               }
-	               System.in.read();
-	           }
-	           else if(opcao == 4) {
-	               map.forEach((chave, valor) -> {
-	            	   System.out.println("ID: " + chave + " - " + valor.exibirNomeIdade());
-	               });
-	               
-	               System.in.read();
-	           }
-	           
-	        }while( (opcao >= 1) && (opcao <= 4) );
-		
-		ler.close();
 
-	}
+           System.out.printf("Digite a opção desejada: ");
+           opcao = ler.nextInt();
+           
+           if (opcao == 1) {
+               Cliente cliente = new Cliente();
+               
+               id_cliente++;
+               cliente.setId(id_cliente);
+               
+               System.out.print("Digite o seu nome: ");
+               cliente.setNome(ler.next());
+               
+               System.out.print("Digite a seu idade: ");
+               cliente.setIdade(ler.nextInt());
+               
+               System.out.print("Digite o seu e-mail: ");
+               cliente.setEmail(ler.next());
+               
+               System.out.print("Deseja criar conta (1 = corrente ou 2 = poupaça)?");
+               tipoConta = ler.nextInt();
+                             
+               if(tipoConta == 1) {
+                   ContaCorrente cc = new ContaCorrente();
+                   
+                   System.out.print("Digite a agencia: ");
+                   cc.setAgencia(ler.next());
+                   
+                   System.out.print("Digite o numero: ");
+                   cc.setNumero(ler.next());
+                   
+                   cc.setSaldo(0);
+                   
+                   cc.setChequeEspecial(100);
+                   
+                   cliente.setConta(cc);
+               }
+               else {
+                   ContaPoupanca cp = new ContaPoupanca();
+                   
+                   System.out.print("Digite a agencia: ");
+                   cp.setAgencia(ler.next());
+                   
+                   System.out.print("Digite o numero: ");
+                   cp.setNumero(ler.next());
+                   
+                   cp.setSaldo(0);
+                   
+                   cp.setRentabilidade(0.10);
+                   
+                   cliente.setConta(cp);                
+               }
+               
+               listaClientes.put(id_cliente, cliente);
+               
+               System.out.printf("Cliente incluído com sucesso!");
+               System.in.read();
+           }
+           else if(opcao == 2) {
+               listaClientes.forEach((chave, valor) -> {
+                   System.out.println("ID: " + chave + " - " + valor.exibirNomeIdade());
+                 });
+               
+               System.out.print("Digite o ID do cliente que você deseja excluir: ");
+               id = ler.nextInt();
+               
+               if (listaClientes.containsKey(id)) {
+            	   listaClientes.remove(id);
+            	   System.out.printf("Cliente excluído com sucesso!");
+               }
+               else
+            	   System.out.printf("Cliente não encontrado!");
+               
+               System.in.read();
+           }
+           else if(opcao == 3) {
+               listaClientes.forEach((chave, valor) -> {
+                   System.out.println("ID: " + chave + " - " + valor.exibirNomeIdade());
+                   
+                   if (valor.getConta() != null)
+                	   System.out.println(valor.getConta().exibirDadosConta());
+                 });
 
+               System.in.read();
+           }
+           else if(opcao == 4) {
+               listaClientes.forEach((chave, valor) -> {
+                   System.out.println("ID: " + chave + " - " + valor.exibirNomeIdade());
+                   
+                   if (valor.getConta() != null)
+                	   System.out.println(valor.getConta().exibirDadosConta());
+                 });
+               
+               System.out.print("Digite o ID do cliente que você deseja realizar o depósito: ");
+               id = ler.nextInt();
+               
+               if (listaClientes.containsKey(id)) {
+            	   
+                   System.out.print("Digite o valor do depósito: ");
+                   v = ler.nextDouble();
+                   
+            	   listaClientes.get(id).getConta().Depositar(v);
+            	   
+            	   System.out.printf("Depósito realizado com sucesso!");
+               }
+               else
+            	   System.out.printf("Cliente não encontrado!");
+
+               System.in.read();
+           }
+           else if(opcao == 5) {
+               listaClientes.forEach((chave, valor) -> {
+                   System.out.println("ID: " + chave + " - " + valor.exibirNomeIdade());
+                   
+                   if (valor.getConta() != null)
+                	   System.out.println(valor.getConta().exibirDadosConta());
+                 });
+               
+               System.out.print("Digite o ID do cliente que você deseja realizar o saque: ");
+               id = ler.nextInt();
+               
+               if (listaClientes.containsKey(id)) {
+            	   
+                   System.out.print("Digite o valor do saque: ");
+                   v = ler.nextDouble();
+                   
+            	   if (listaClientes.get(id).getConta().Sacar(v))
+            		   System.out.printf("Saque realizado com sucesso!");
+            	   else
+            		   System.out.printf("Saldo insuficiente para saque!");
+               }
+               else
+            	   System.out.printf("Cliente não encontrado!");
+
+               System.in.read();
+           }
+           else if(opcao == 6) {
+               listaClientes.forEach((chave, valor) -> {
+                   System.out.println("ID: " + chave + " - " + valor.exibirNomeIdade());
+                   
+                   if (valor.getConta() != null)
+                	   System.out.println(valor.getConta().exibirDadosConta());
+                   		for (String transacao: valor.getConta().getHistorico()) {
+                   			System.out.println(transacao);
+                   		}
+                 });
+
+               System.in.read();
+           }
+           
+        }while( (opcao >= 1) && (opcao <= 6) );
+        ler.close();
+    }
 }
