@@ -4,5 +4,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="collections"/>
 	<classpathentry kind="src" path="polimorfismo"/>
+	<classpathentry kind="src" path="classeAbstrata"/>
+	<classpathentry kind="src" path="exceptions"/>
+	<classpathentry kind="src" path="metodosString"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
